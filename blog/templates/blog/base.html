@@ -1,0 +1,31 @@
+{% load staticfiles %}
+<html>
+    <head>
+        <link href="//fonts.googleapis.com/css?family=Lobster&subset=latin,latin-ext" rel="stylesheet" type="text/css">
+        <link rel="stylesheet" href="{% static 'css/blog.css' %}">
+        <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css">
+        <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap-theme.min.css">
+        <title>Django Girls blog</title>
+    </head>
+    <body>
+        <div class="page-header">
+            <!-- 로그인 안 되어있다면 로그인 버튼이, 되어있다면 글 추가 버튼이 나오게 -->
+            {% if user.is_authenticated %}
+            <a href="{% url 'post_new' %}" class="top-menu"><span class="glyphicon glyphicon-plus"></span></a>
+            <a href="{% url 'logout' %}" class="top-menu">로그아웃</a>
+            {% else %}
+            <a href="{% url 'signin' %}" class="top-menu">로그인<span class="glyphicon glyphicon-user"></span></a>
+            <a href="{% url 'signup' %}" class="top-menu">회원가입</a>
+            {% endif %}
+            <h1><a href="/">Django Girls Blog</a></h1>
+        </div>
+        <div class="content container">
+            <div class="row">
+                <div class="col-md-8">
+                    {% block content %}
+                    {% endblock %}
+                </div>
+            </div>
+        </div>
+    </body>
+</html>
